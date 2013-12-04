@@ -25,9 +25,12 @@ class Report implements Plugin{
 		$this->server->api->ban->cmdWhitelist("report");
 	}
 	
-	public function cmd($cmd, $args, $issuer, $params){
+	public function cmd($cmd, $args, $issuer){
 		switch($cmd){
 			case "report":
+				if($args[0] == ""){
+					$output = "Usage: /report <your message>";
+				}else{
 				$name = $issuer->username;
 				$msg = implode(" ", $args);
 				$this->config['Reports'][] = array($name, $msg);
